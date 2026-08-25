@@ -2,14 +2,11 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "//": [
     "Root/base TypeScript configuration.",
-    "Packages extend it via \"extends\": \"../../tsconfig.json\" and override include/files/outDir."
+    "Projects extend it via \"extends\": \"../tsconfig.json\"."
   ],
   "compilerOptions": {
-    // Language & environment
     "target": "ES2023",
     "lib": ["ES2023"],
-
-    // Modules
     "module": "nodenext",
     "moduleResolution": "nodenext",
     "verbatimModuleSyntax": true,
@@ -17,24 +14,18 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-
-    // Strictness
     "strict": true,
     "noUncheckedIndexedAccess": true,
     "noImplicitOverride": true,
     "noFallthroughCasesInSwitch": true,
-
-    // Diagnostics hygiene
     "skipLibCheck": true,
-
-    // Emit
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
     "incremental": true,
     "newLine": "lf"
   },
-
-  // Solution-style root: no sources compile from here; workspaces define their own inputs.
-  "include": []
+  "include": [],
+  "files": [],
+  "references": [{ "path": "./server" }]
 }

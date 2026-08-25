@@ -1,52 +1,51 @@
 # APIRank
 
-Open-source API quality, performance monitoring, observability, and AI optimization platform.
+Open-source API performance monitoring — dashboard and API for slow-request ingest and project management.
 
-> **Status:** scaffolding phase — monorepo foundation only. Application features are not implemented yet.
-
-## Repository layout
+## Layout
 
 ```
 apirank/
-├── apps/       # Deployable applications (API, web, workers)
-├── packages/   # Shared libraries and internal packages
-├── database/   # Database schemas, migrations, tooling
-├── docs/       # Project documentation
-├── examples/   # Usage examples
-└── .github/    # CI workflows and repository configuration
+├── web/                 # Dashboard (React + Vite + TanStack)
+├── server/              # Bun + Hono API + Postgres/PGlite
+├── database/migrations/
+└── docker-compose.yml   # Optional local Postgres
 ```
 
-## Prerequisites
+### Prerequisites
 
 - [Bun](https://bun.sh) >= 1.3
+- Docker (optional, for real Postgres)
 
-## Getting started
+### Run the stack
 
 ```sh
 bun install
 bun run build
+bun run dev
+```
+
+- API: http://localhost:3000 (embedded Postgres/PGlite by default — no Docker required)
+- Dashboard: http://localhost:5173
+
+Optional real Postgres:
+
+```sh
+docker compose up -d
+# set DATABASE_URL=postgres://apirank:apirank@localhost:5432/apirank
+bun run db:migrate
 ```
 
 ## Scripts
 
-| Script                 | Description                                  |
-| ---------------------- | -------------------------------------------- |
-| `bun run dev`          | Run all apps/packages in development mode    |
-| `bun run build`        | Build all workspaces (via Turborepo)         |
-| `bun run typecheck`    | Typecheck all workspaces (via Turborepo)     |
-| `bun run lint`         | Lint and check formatting (Biome)            |
-| `bun run lint:fix`     | Fix lint/format issues                       |
-| `bun run format`       | Format code (Biome formatter)                |
-| `bun run format:check` | Check formatting without writing             |
-| `bun run test`         | Run tests across all workspaces              |
-| `bun run clean`        | Remove build artifacts (via Turborepo)       |
-
-## Tooling
-
-- **Package manager & runtime:** Bun (workspaces)
-- **Build orchestration:** Turborepo
-- **Language:** TypeScript (strict)
-- **Linting & formatting:** Biome
+| Script | Description |
+| --- | --- |
+| `bun run dev` | Run web + server in development |
+| `bun run build` | Build web + server |
+| `bun run typecheck` | Typecheck both projects |
+| `bun run lint` | Lint with Biome + ESLint |
+| `bun run test` | Run server tests |
+| `bun run db:migrate` | Apply SQL migrations |
 
 ## License
 

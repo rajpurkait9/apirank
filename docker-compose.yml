@@ -1,0 +1,14 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: apirank
+      POSTGRES_PASSWORD: apirank
+      POSTGRES_DB: apirank
+    ports:
+      - "5432:5432"
+    volumes:
+      - apirank_pg:/var/lib/postgresql/data
+
+volumes:
+  apirank_pg:

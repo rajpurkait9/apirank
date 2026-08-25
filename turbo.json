@@ -1,7 +1,7 @@
 {
   "$schema": "https://turborepo.com/schema.json",
   "ui": "tui",
-  "globalEnv": ["NODE_ENV", "CI"],
+  "globalEnv": ["NODE_ENV", "CI", "PORT", "DATABASE_URL", "WEB_ORIGIN", "VITE_API_URL"],
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
@@ -10,9 +10,11 @@
     "typecheck": {
       "dependsOn": ["^build"]
     },
-    "lint": {},
+    "lint": {
+      "dependsOn": ["^build"]
+    },
     "test": {
-      "dependsOn": ["build"]
+      "dependsOn": ["^build"]
     },
     "dev": {
       "cache": false,
